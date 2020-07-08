@@ -8,7 +8,7 @@ const userSchema = createSchema({
 	firstName: Type.string(),
 	lastName: Type.string(),
 	lastAuthDate: Type.date({
-		default: new Date().getTime(),
+		default: new Date(),
 	}),
 });
 
