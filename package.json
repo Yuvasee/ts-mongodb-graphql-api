@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "bot-api",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "",
     "main": "./scr/api.ts",
     "scripts": {
@@ -11,7 +11,7 @@
         "lint": "eslint"
     },
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/dotenv": "^8.2.0",
         "@types/mongoose": "^5.7.30",
@@ -28,6 +28,7 @@
     "dependencies": {
         "dotenv": "^8.2.0",
         "mongoose": "^5.9.22",
+        "ts-mongoose": "^0.0.21",
         "winston": "^3.3.3"
     }
 }
