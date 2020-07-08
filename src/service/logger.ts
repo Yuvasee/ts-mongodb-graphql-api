@@ -1,4 +1,5 @@
 import winston = require("winston");
+import config from "../config";
 
 const {
 	format: { combine, timestamp, json },
@@ -8,10 +9,10 @@ winston.configure({
 	format: combine(timestamp({ format: "YYYY-MM-DD HH:mm:ss" }), json()),
 	transports: [
 		new winston.transports.File({
-			filename: process.env.API_LOG_FILENAME,
+			filename: config.logs.winston,
 		}),
 		new winston.transports.Console({
-			format: winston.format.simple(),
+			format: winston.format.prettyPrint(),
 		}),
 	],
 });
