@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": ["require-path-exists", "@typescript-eslint"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:require-path-exists/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "env": {
+        "node": true,
+        "es2017": true
+    },
+    "rules": {
+        "max-len": ["error", { "code": 120 }],
+        "indent": ["error", "tab"],
+        "require-path-exists/exists": ["error", { "extensions": ["", ".ts"] }]
+    }
+}
