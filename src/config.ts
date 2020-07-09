@@ -1,4 +1,8 @@
 export default {
+	app: {
+		port: process.env.APP_PORT || 21735,
+		clientUrl: process.env.CLIENT_URL || "login.local",
+	},
 	logs: {
 		winston: process.env.WINSTON_LOG_PATH || "./logs/winston.log",
 	},
