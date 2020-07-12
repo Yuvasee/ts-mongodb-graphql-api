@@ -1,9 +1,11 @@
-import express = require("express");
-import cors = require("cors");
+import express from "express";
+import cors from "cors";
 
 import "./service/logger";
 import "./service/mongoose";
 import config from "./config";
+import authMiddleware from "./middleware/auth";
+import graphqlMiddleware from "./middleware/graphql";
 
 const app = express();
 
@@ -13,7 +15,9 @@ app.use(
 	cors({
 		origin: config.app.clientUrl,
 		optionsSuccessStatus: 200,
-	})
+	}),
+	authMiddleware,
+	graphqlMiddleware
 );
 
 app.use("*", (req, res) => {
