@@ -1,42 +1,62 @@
 {
-    "private": true,
-    "name": "bot-api",
-    "version": "0.0.3",
-    "description": "",
-    "main": "./scr/api.ts",
-    "scripts": {
-        "start": "node --inspect --require=ts-node/register ./src/api.ts",
-        "watch": "nodemon --config ",
-        "build": "eslint && tsc",
-        "lint": "eslint"
-    },
-    "author": "",
-    "license": "MIT",
-    "devDependencies": {
-        "@types/cors": "^2.8.6",
-        "@types/dotenv": "^8.2.0",
-        "@types/express": "^4.17.7",
-        "@types/mongoose": "^5.7.30",
-        "@types/node": "^14.0.19",
-        "@typescript-eslint/eslint-plugin": "^3.6.0",
-        "@typescript-eslint/parser": "^3.6.0",
-        "eslint": "^7.4.0",
-        "eslint-plugin-require-path-exists": "^1.1.9",
-        "prettier": "^2.0.5",
-        "prettier-eslint": "^11.0.0",
-        "ts-node": "^8.10.2",
-        "typescript": "^3.9.6"
-    },
-    "dependencies": {
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "express-graphql": "^0.11.0",
-        "graphql": "^15.3.0",
-        "graphql-compose": "^7.18.1",
-        "graphql-compose-mongoose": "^7.4.1",
-        "mongoose": "^5.9.22",
-        "ts-mongoose": "^0.0.21",
-        "winston": "^3.3.3"
-    }
+  "private": true,
+  "name": "bot-api",
+  "version": "0.0.3",
+  "description": "",
+  "main": "./scr/api.ts",
+  "scripts": {
+    "start": "node --inspect --require=ts-node/register ./src/api.ts",
+    "watch": "nodemon --config ",
+    "build": "eslint && tsc",
+    "lint": "eslint",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.7",
+    "@types/jest": "^26.0.4",
+    "@types/mongoose": "^5.7.30",
+    "@types/node": "^14.0.19",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "babel-jest": "^26.1.0",
+    "eslint": "^7.4.0",
+    "eslint-plugin-require-path-exists": "^1.1.9",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "prettier-eslint": "^11.0.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "graphql-compose": "^7.18.1",
+    "graphql-compose-mongoose": "^7.4.1",
+    "mongoose": "^5.9.22",
+    "ts-mongoose": "^0.0.21",
+    "winston": "^3.3.3"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  }
 }
