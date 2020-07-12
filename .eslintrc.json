@@ -4,10 +4,9 @@
     "parserOptions": {
         "project": ["./tsconfig.json"]
     },
-    "plugins": ["require-path-exists", "@typescript-eslint"],
+    "plugins": ["@typescript-eslint"],
     "extends": [
         "eslint:recommended",
-        "plugin:require-path-exists/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
@@ -17,7 +16,6 @@
     },
     "rules": {
         "max-len": ["error", { "code": 120 }],
-        "indent": ["error", "tab"],
-        "require-path-exists/exists": ["error", { "extensions": ["", ".ts"] }]
+        "indent": ["error", "tab"]
     }
 }

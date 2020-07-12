@@ -3,15 +3,15 @@
         "strict": true,
         "target": "es2019",
         "module": "commonjs",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+
         "outDir": "build",
         "sourceMap": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "baseUrl": "."
     },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        ".vscode"
-    ]
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", ".vscode"]
 }
