@@ -2,7 +2,7 @@ import { schemaComposer } from "graphql-compose";
 import userType from "./types/user/User";
 
 schemaComposer.Query.addFields({
-	userById: userType.getResolver("findById"),
+	userByTelegramId: userType.getResolver("byTelegramId"),
 });
 
 schemaComposer.Mutation.addFields({

@@ -5,8 +5,8 @@
     "description": "",
     "main": "./scr/api.ts",
     "scripts": {
-        "start": "node --inspect --require=ts-node/register ./src/api.ts",
-        "watch": "nodemon --config ",
+        "start": "node --inspect -r ts-node/register -r tsconfig-paths/register ./src/api.ts",
+        "watch": "nodemon",
         "build": "eslint && tsc",
         "lint": "eslint",
         "test": "jest"
@@ -32,6 +32,7 @@
         "prettier": "^2.0.5",
         "prettier-eslint": "^11.0.0",
         "ts-node": "^8.10.2",
+        "tsconfig-paths": "^3.9.0",
         "typescript": "^3.9.6"
     },
     "dependencies": {

@@ -5,25 +5,32 @@ import config from "src/config";
 import User, { UserProps } from "src/mongoose/schema/User";
 
 interface SingInArgs {
-	id: number;
+	telegramId: number;
 	firstName: string;
 	lastName: string;
-	authDate: number;
+	authDate: string;
 	hash: string;
 }
 
 const signInResolver: ResolverDefinition<unknown, unknown, SingInArgs> = {
 	name: "signIn",
 	type: "String!",
-	resolve: async ({ args: { id, firstName, lastName, authDate } }) => {
+	args: {
+		telegramId: "Int!",
+		firstName: "String!",
+		lastName: "String!",
+		authDate: "String!",
+		hash: "String!",
+	},
+	resolve: async ({ args: { telegramId, firstName, lastName, authDate } }) => {
 		try {
-			let user = await User.getByTelegramId(id);
+			let user = await User.getByTelegramId(telegramId);
 
 			const userUpdate: Partial<UserProps> = {
-				telegramId: id,
+				telegramId,
 				firstName,
 				lastName,
-				lastAuthDate: new Date(authDate * 1000),
+				lastAuthDate: new Date(Number(authDate) * 1000),
 			};
 
 			if (!user) {
@@ -37,7 +44,7 @@ const signInResolver: ResolverDefinition<unknown, unknown, SingInArgs> = {
 				expiresIn: config.auth.jwtExpiration,
 			});
 
-			return { accessToken };
+			return accessToken;
 		} catch (error) {
 			return Promise.reject(error);
 		}

@@ -16,7 +16,7 @@ app.use(
 		origin: config.app.clientUrl,
 		optionsSuccessStatus: 200,
 	}),
-	authMiddleware,
+	// authMiddleware
 	graphqlMiddleware
 );
 
@@ -25,3 +25,5 @@ app.use("*", (req, res) => {
 });
 
 app.listen(config.app.port);
+
+console.log(`Listening port ${config.app.port}...`);
