@@ -1,5 +1,5 @@
 import { schemaComposer } from "graphql-compose";
-import userType from "./User";
+import userType from "./types/user/User";
 
 schemaComposer.Query.addFields({
 	userById: userType.getResolver("findById"),
