@@ -1,12 +1,12 @@
 import { graphqlHTTP } from "express-graphql";
-import { schemaComposer } from "graphql-compose";
+import schema from "../graphql/schema";
 
-const schema = schemaComposer.buildSchema();
-
-export default graphqlHTTP((request) => ({
+const graphqlMiddleware = graphqlHTTP((request) => ({
 	schema,
 	graphiql: true,
 	context: {
 		// user: request.user,
 	},
 }));
+
+export default graphqlMiddleware;
