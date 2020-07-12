@@ -1,16 +1,9 @@
-import { ResolverDefinition } from "graphql-compose";
 import { composeWithMongoose } from "graphql-compose-mongoose";
 
 import User from "../mongoose/schema/User";
+import signInResolver from "./User.signIn";
 
-const UserTC = composeWithMongoose(User);
+const userType = composeWithMongoose(User);
+userType.addResolver(signInResolver);
 
-const user: ResolverDefinition<any, any> = {
-	name: "user",
-	type: "User!",
-	resolve: ({ context: { user } }) => user as string | Record<string, unknown>,
-};
-
-UserTC.addResolver(user);
-
-export default UserTC;
+export default userType;

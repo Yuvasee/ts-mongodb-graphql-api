@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { verify } from "jsonwebtoken";
 import moment from "moment";
 
-import UserModel from "../mongoose/schema/User";
+import UserModel from "src/mongoose/schema/User";
 import config from "src/config";
 
 const authMiddleware: RequestHandler = async (req, res, next) => {

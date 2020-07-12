@@ -10,16 +10,16 @@ const userSchema = createSchema({
 	lastAuthDate: Type.date({
 		default: new Date(),
 	}),
-	accessToken: Type.string(),
-	tokenExpiredOn: Type.date(),
 });
 
-const userModel = typedModel("User", userSchema, undefined, undefined, {
-	telegramIdExist: function (telegramId: number) {
-		return this.findOne({ telegramId });
-	},
+const User = typedModel("User", userSchema, undefined, undefined, {
+	getByTelegramId,
 });
 
-export default userModel;
+function getByTelegramId(this: typeof User, telegramId: number) {
+	return this.findOne({ telegramId });
+}
+
+export default User;
 export type UserDoc = ExtractDoc<typeof userSchema>;
 export type UserProps = ExtractProps<typeof userSchema>;
