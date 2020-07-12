@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Node: attach",
+            "request": "attach",
+            "port": 9229,
+            "skipFiles": ["<node_internals>/**"],
+            "type": "node"
+        },
+        {
             "name": "Jest: this file",
             "type": "node",
             "request": "launch",

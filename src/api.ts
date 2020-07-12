@@ -16,7 +16,7 @@ app.use(
 		origin: config.app.clientUrl,
 		optionsSuccessStatus: 200,
 	}),
-	// authMiddleware
+	authMiddleware,
 	graphqlMiddleware
 );
 
