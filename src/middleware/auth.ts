@@ -23,7 +23,10 @@ const authMiddleware: RequestHandler = async (req, res, next) => {
 			return next();
 		}
 
-		Object.assign(req, { user: user.toObject() as UserProps });
+		Object.assign(req, {
+			user: user.toObject() as UserProps,
+			accessToken,
+		});
 
 		return next();
 	} catch (error) {

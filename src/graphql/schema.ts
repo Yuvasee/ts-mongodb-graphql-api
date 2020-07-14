@@ -1,12 +1,13 @@
 import { schemaComposer } from "graphql-compose";
-import userType from "./types/user/User";
+import UserTC from "./types/user/User";
+import { guest } from "./middleware/auth";
 
 schemaComposer.Query.addFields({
-	userByTelegramId: userType.getResolver("byTelegramId"),
+	userByTelegramId: UserTC.getResolver("byTelegramId"),
 });
 
 schemaComposer.Mutation.addFields({
-	signIn: userType.getResolver("signIn"),
+	signIn: UserTC.getResolver("signIn", [guest]),
 });
 
 const schema = schemaComposer.buildSchema();
