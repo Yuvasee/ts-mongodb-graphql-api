@@ -1,11 +1,12 @@
 import { ResolverDefinition } from "graphql-compose";
 import { sign } from "jsonwebtoken";
+import { sha256, hmac } from "hash.js";
 
 import config from "src/config";
 import User, { UserProps } from "src/mongoose/schema/User";
 
 interface SingInArgs {
-	id: number;
+	id: string;
 	first_name: string;
 	last_name: string;
 	auth_date: string;
@@ -16,20 +17,24 @@ const signInResolver: ResolverDefinition<unknown, unknown, SingInArgs> = {
 	name: "signIn",
 	type: "String!",
 	args: {
-		id: "Int!",
+		id: "String!",
 		first_name: "String!",
 		last_name: "String!",
 		auth_date: "String!",
 		hash: "String!",
 	},
 	resolve: async ({ args }) => {
-		const { id, first_name, last_name, auth_date, hash } = args;
+		if (!checkTelegramLoginHash(args)) {
+			return Promise.reject(new Error("Invalid Telegram credentials"));
+		}
+
+		const { id, first_name, last_name, auth_date } = args;
 
 		try {
-			let user = await User.getByTelegramId(id);
+			let user = await User.getByTelegramId(Number(id));
 
 			const userUpdate: Partial<UserProps> = {
-				telegramId: id,
+				telegramId: Number(id),
 				firstName: first_name,
 				lastName: last_name,
 				lastAuthDate: new Date(Number(auth_date) * 1000),
@@ -46,11 +51,28 @@ const signInResolver: ResolverDefinition<unknown, unknown, SingInArgs> = {
 				expiresIn: config.auth.jwtExpiration,
 			});
 
-			return accessToken;
+			return Promise.resolve(accessToken);
 		} catch (error) {
 			return Promise.reject(error);
 		}
 	},
 };
+
+export function checkTelegramLoginHash(signInArgs: SingInArgs): boolean {
+	const { hash, ...checkData } = signInArgs;
+
+	const checkString = Object.entries(checkData)
+		.map((kv: string[]) => `${kv[0]}=${kv[1]}`)
+		.sort()
+		.join("\n");
+
+	const secretKey = sha256().update(config.auth.telegramBotToken).digest();
+
+	const checkHash = hmac((sha256 as unknown) as BlockHash<unknown>, secretKey)
+		.update(checkString)
+		.digest("hex");
+
+	return checkHash === hash;
+}
 
 export default signInResolver;
