@@ -9,7 +9,7 @@ const byTelegramId: ResolverDefinition<unknown, unknown, { telegramId: number }>
 			const user = await User.getByTelegramId(telegramId);
 
 			if (!user) {
-				return Promise.reject("No user with found");
+				return Promise.reject("No user found");
 			}
 
 			return user.toObject() as UserProps;

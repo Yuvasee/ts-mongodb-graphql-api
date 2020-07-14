@@ -5,10 +5,10 @@ import config from "src/config";
 import User, { UserProps } from "src/mongoose/schema/User";
 
 interface SingInArgs {
-	telegramId: number;
-	firstName: string;
-	lastName: string;
-	authDate: string;
+	id: number;
+	first_name: string;
+	last_name: string;
+	auth_date: string;
 	hash: string;
 }
 
@@ -16,21 +16,23 @@ const signInResolver: ResolverDefinition<unknown, unknown, SingInArgs> = {
 	name: "signIn",
 	type: "String!",
 	args: {
-		telegramId: "Int!",
-		firstName: "String!",
-		lastName: "String!",
-		authDate: "String!",
+		id: "Int!",
+		first_name: "String!",
+		last_name: "String!",
+		auth_date: "String!",
 		hash: "String!",
 	},
-	resolve: async ({ args: { telegramId, firstName, lastName, authDate } }) => {
+	resolve: async ({ args }) => {
+		const { id, first_name, last_name, auth_date, hash } = args;
+
 		try {
-			let user = await User.getByTelegramId(telegramId);
+			let user = await User.getByTelegramId(id);
 
 			const userUpdate: Partial<UserProps> = {
-				telegramId,
-				firstName,
-				lastName,
-				lastAuthDate: new Date(Number(authDate) * 1000),
+				telegramId: id,
+				firstName: first_name,
+				lastName: last_name,
+				lastAuthDate: new Date(Number(auth_date) * 1000),
 			};
 
 			if (!user) {
